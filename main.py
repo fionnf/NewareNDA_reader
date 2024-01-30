@@ -75,4 +75,5 @@ def plot_capacity(file_path, theoretical_capacity=None):
     plt.show()
 
 print_ndax_as_csv(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF041\FF041Batt_b.ndax")
-plot_capacity(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF027\FF027Ba.ndax", theoretical_capacity=0.8)
+plot_capacity(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF027\FF027Ba.ndax",
+              theoretical_capacity=0.8)
