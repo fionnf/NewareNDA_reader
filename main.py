@@ -41,6 +41,7 @@ def plot_capacity(file_path, theoretical_capacity=None):
     ax1.set_xlabel('Cycle Number')
     ax1.set_ylabel('Capacity (mAh)', color='blue')
     ax1.tick_params(axis='y', labelcolor='blue')
+    ax1.set_ylim(0, 1)
 
     # Create a second y-axis for Coulombic Efficiency
     ax2 = ax1.twinx()
@@ -51,7 +52,7 @@ def plot_capacity(file_path, theoretical_capacity=None):
 
     # Add a legend
     ax1.legend(loc='lower left')
-    ax2.legend(loc='lower left')
+    ax2.legend(loc='lower right')
 
     # Add a horizontal line for theoretical capacity if provided
     if theoretical_capacity is not None:
@@ -65,7 +66,7 @@ def plot_capacity(file_path, theoretical_capacity=None):
     cycle_start_times = grouped['Timestamp'].min()
     time_since_start = (cycle_start_times - cycle_start_times.min()).dt.days
 
-    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.')
+    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=0.005)  # Reduce marker size
     ax3.xaxis.set_ticks_position('top')  # Move to the top
     ax3.xaxis.set_label_position('top')  # Move to the top
     ax3.set_xlim([0, time_since_start.max()])  # Set x-axis limits
@@ -74,4 +75,4 @@ def plot_capacity(file_path, theoretical_capacity=None):
     plt.show()
 
 print_ndax_as_csv(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF041\FF041Batt_b.ndax")
-plot_capacity(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF027\FF027Ba.ndax")
+plot_capacity(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF027\FF027Ba.ndax", theoretical_capacity=0.8)
