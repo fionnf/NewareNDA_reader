@@ -14,66 +14,63 @@ def print_ndax_as_csv(file_path):
     newaredata = df
 
 
-def plot_capacity(file_path, theoretical_capacity=None):
-    """
-    Plots the charge and discharge capacities, Coulombic Efficiency, theoretical capacity, and time since the start of the experiment for each cycle.
-
-    Parameters:
-    file_path (str): Path to the data file.
-    theoretical_capacity (float or None): Theoretical capacity value to plot as a horizontal line. Default is None.
-    """
-
+def plot_capacity(file_path, theoretical_capacity):
     data = pd.DataFrame(nda.read(file_path))
 
-    # Group by Cycle and get maximum capacity for charge and discharge
     grouped = data.groupby('Cycle')
     max_charge = grouped['Charge_Capacity(mAh)'].max()
     max_discharge = grouped['Discharge_Capacity(mAh)'].max()
 
-    # Calculate Coulombic Efficiency
     coulombic_efficiency = (max_discharge / max_charge) * 100
 
-    # Plotting
     fig, ax1 = plt.subplots()
 
-    ax1.scatter(max_charge.index, max_charge, label='Max Charge Capacity', color='blue', s=10)
-    ax1.scatter(max_discharge.index, max_discharge, label='Max Discharge Capacity', color='green', s=10)
+    charge_capacity_scatter = ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=10)
+    discharge_capacity_scatter = ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=10)
     ax1.set_xlabel('Cycle Number')
     ax1.set_ylabel('Capacity (mAh)', color='blue')
     ax1.tick_params(axis='y', labelcolor='blue')
-    ax1.set_ylim(0, 1)
+    ax1.set_ylim(0, max(max_charge.max(), max_discharge.max()) * 1.1)
+    ax1.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
 
-    # Create a second y-axis for Coulombic Efficiency
     ax2 = ax1.twinx()
-    ax2.scatter(max_charge.index, coulombic_efficiency, label='Coulombic Efficiency', color='red', s=10)
+    coulombic_efficiency_scatter = ax2.scatter(max_charge.index, coulombic_efficiency, label='Coulombic Efficiency', color='red', s=10)
     ax2.set_ylabel('Coulombic Efficiency (%)', color='red')
     ax2.tick_params(axis='y', labelcolor='red')
     ax2.set_ylim(0, 110)
+    ax2.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
 
-    # Add a legend
-    ax1.legend(loc='lower left')
-    ax2.legend(loc='lower right')
-
-    # Add a horizontal line for theoretical capacity if provided
     if theoretical_capacity is not None:
-        ax1.axhline(theoretical_capacity, color='orange', linestyle='--', label='Theoretical Capacity')
-
-    # Add a second x-axis for time since the start in days per cycle
-    ax3 = ax1.twiny()
-    ax3.set_xlabel('Time Since Start (days)')
+        theoretical_capacity_line = ax1.axhline(theoretical_capacity, color='orange', linestyle='--', label='Theoretical Capacity')
 
     # Calculate the time in days for each cycle
     cycle_start_times = grouped['Timestamp'].min()
-    time_since_start = (cycle_start_times - cycle_start_times.min()).dt.days
+    first_measurement_time = cycle_start_times.min()
+    time_since_start = (cycle_start_times - first_measurement_time).dt.total_seconds() / 86400  # Convert to days
 
-    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=0.005)  # Reduce marker size
+    # Create a second x-axis for time since the start in days per cycle
+    ax3 = ax1.twiny()
+    ax3.set_xlabel('Time Since Start (days)')
+    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=0.005)  # Reduced marker size
     ax3.xaxis.set_ticks_position('top')  # Move to the top
     ax3.xaxis.set_label_position('top')  # Move to the top
     ax3.set_xlim([0, time_since_start.max()])  # Set x-axis limits
 
-    # Show the plot
+    # Collecting legend handles and labels from both axes
+    handles, labels = [], []
+    for ax in [ax1, ax2]:
+        ax_handles, ax_labels = ax.get_legend_handles_labels()
+        handles.extend(ax_handles)
+        labels.extend(ax_labels)
+
+
+    # Creating a single legend with the collected handles and labels
+    fig.legend(handles, labels, loc='upper center', bbox_to_anchor=(0.5, -0.05), fancybox=True, shadow=True, ncol=4)
+
     plt.show()
 
-print_ndax_as_csv(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF041\FF041Batt_b.ndax")
-plot_capacity(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF027\FF027Ba.ndax",
+
+
+print_ndax_as_csv(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax")
+plot_capacity(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax",
               theoretical_capacity=0.8)
