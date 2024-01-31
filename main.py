@@ -88,4 +88,4 @@ plot_styles = {
 file_path = r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax"
 
 #print_ndax_as_csv(file_path)
-plot_capacity(file_path, theoretical_capacity=0.8, styles=plot_styles, min_cycle=0, max_cycle=60)
+plot_capacity(file_path, theoretical_capacity=0.7, styles=plot_styles, min_cycle=0, max_cycle=60)
