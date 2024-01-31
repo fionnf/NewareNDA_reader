@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="bug fixes">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="Updated and fixed time x axis">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +101,7 @@
       <workItem from="1706629635743" duration="235000" />
       <workItem from="1706629896246" duration="1500000" />
       <workItem from="1706707632680" duration="113000" />
-      <workItem from="1706716545760" duration="669000" />
+      <workItem from="1706716545760" duration="974000" />
     </task>
     <task id="LOCAL-00001" summary="Read an NDA file and print it as a CSV">
       <option name="closed" value="true" />
@@ -160,7 +159,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706631205696</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Updated and fixed time x axis">
+      <option name="closed" value="true" />
+      <created>1706717397270</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706717397270</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -183,9 +190,10 @@
     <MESSAGE value="README  added" />
     <MESSAGE value="Time and cycle number x axes added" />
     <MESSAGE value="Time and cycle number x axes added bug fixes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Time and cycle number x axes added bug fixes" />
+    <MESSAGE value="Updated and fixed time x axis" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated and fixed time x axis" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706717197156" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706717535913" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
