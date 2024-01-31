@@ -69,7 +69,7 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
         line_style = styles.get('line_styles', {}).get('theoretical_capacity', {'color': 'orange', 'linestyle': '--'})
         ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
 
-    legend = ax1.legend(loc='middle right', fontsize=styles.get('legend_fontsize', 12))
+    legend = ax1.legend(loc='lower right', fontsize=styles.get('legend_fontsize', 12))
 
     plt.tight_layout()
     plt.show()
