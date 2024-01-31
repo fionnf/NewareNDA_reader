@@ -16,6 +16,7 @@ def print_ndax_as_csv(file_path):
     newaredata = df
 
 
+
 def plot_capacity(file_path, theoretical_capacity=None, styles=None):
     if styles is None:
         styles = {}
@@ -56,15 +57,16 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None):
 
 plot_styles = {
     'figure_size': (10, 8),
-    'axis_label_fontsize': 14,
-    'tick_label_fontsize': 12,
-    'legend_fontsize': 12,
+    'axis_label_fontsize': 18,
+    'tick_label_fontsize': 16,
+    'legend_fontsize': 16,
     'scatter_size': 10,
     'line_styles': {
         'theoretical_capacity': {'color': 'orange', 'linestyle': '--'}
     }
 }
 
-print_ndax_as_csv(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax")
-plot_capacity(r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax",
-              theoretical_capacity=0.8, styles=plot_styles)
+file_path = r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax"
+
+#print_ndax_as_csv(file_path)
+plot_capacity(file_path, theoretical_capacity=0.8, styles=plot_styles)
