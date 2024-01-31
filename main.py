@@ -51,6 +51,14 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
     ax2.set_ylim(0, 110)
     ax2.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
 
+    # Create a second x-axis for time since the start in days per cycle
+    ax3 = ax1.twiny()
+    ax3.set_xlabel('Time Since Start (days)')
+    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=0.005)  # Reduced marker size
+    ax3.xaxis.set_ticks_position('top')  # Move to the top
+    ax3.xaxis.set_label_position('top')  # Move to the top
+    ax3.set_xlim([0, time_since_start.max()])  # Set x-axis limits
+
     if theoretical_capacity is not None:
         line_style = styles.get('line_styles', {}).get('theoretical_capacity', {'color': 'orange', 'linestyle': '--'})
         ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
