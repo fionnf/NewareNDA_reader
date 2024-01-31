@@ -17,11 +17,16 @@ def print_ndax_as_csv(file_path):
 
 
 
-def plot_capacity(file_path, theoretical_capacity=None, styles=None):
+def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=None, max_cycle=None):
     if styles is None:
         styles = {}
 
     data = pd.DataFrame(nda.read(file_path))
+
+    if min_cycle is not None:
+        data = data[data['Cycle'] >= min_cycle]
+    if max_cycle is not None:
+        data = data[data['Cycle'] <= max_cycle]
 
     grouped = data.groupby('Cycle')
     max_charge = grouped['Charge_Capacity(mAh)'].max()
@@ -60,7 +65,7 @@ plot_styles = {
     'axis_label_fontsize': 18,
     'tick_label_fontsize': 16,
     'legend_fontsize': 16,
-    'scatter_size': 10,
+    'scatter_size': 20,
     'line_styles': {
         'theoretical_capacity': {'color': 'orange', 'linestyle': '--'}
     }
@@ -69,4 +74,4 @@ plot_styles = {
 file_path = r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax"
 
 #print_ndax_as_csv(file_path)
-plot_capacity(file_path, theoretical_capacity=0.8, styles=plot_styles)
+plot_capacity(file_path, theoretical_capacity=0.8, styles=plot_styles, min_cycle=0, max_cycle=60)
