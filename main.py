@@ -51,19 +51,25 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
     ax2.set_ylim(0, 110)
     ax2.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
 
+    # Calculate the time in days for each cycle
+    cycle_start_times = grouped['Timestamp'].min()
+    first_measurement_time = cycle_start_times.min()
+    time_since_start = (cycle_start_times - first_measurement_time).dt.total_seconds() / 86400  # Convert to days
+
     # Create a second x-axis for time since the start in days per cycle
     ax3 = ax1.twiny()
-    ax3.set_xlabel('Time Since Start (days)')
-    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=0.005)  # Reduced marker size
+    ax3.set_xlabel('Time Since Start (days)', fontsize=styles.get('axis_label_fontsize', 14))
+    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=styles.get('scatter_size', 0.005))
     ax3.xaxis.set_ticks_position('top')  # Move to the top
     ax3.xaxis.set_label_position('top')  # Move to the top
+    ax3.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
     ax3.set_xlim([0, time_since_start.max()])  # Set x-axis limits
 
     if theoretical_capacity is not None:
         line_style = styles.get('line_styles', {}).get('theoretical_capacity', {'color': 'orange', 'linestyle': '--'})
         ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
 
-    legend = ax1.legend(loc='upper right', fontsize=styles.get('legend_fontsize', 12))
+    legend = ax1.legend(loc='middle right', fontsize=styles.get('legend_fontsize', 12))
 
     plt.tight_layout()
     plt.show()
