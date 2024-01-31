@@ -2,7 +2,6 @@ import NewareNDA as nda
 import pandas as pd
 import os
 import matplotlib.pyplot as plt
-from matplotlib.dates import DateFormatter, DayLocator
 
 
 
@@ -16,8 +15,7 @@ def print_ndax_as_csv(file_path):
     newaredata = df
 
 
-
-def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=None, max_cycle=None):
+def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=None, max_cycle=None, save_image=False):
     if styles is None:
         styles = {}
 
@@ -72,6 +70,16 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
     legend = ax1.legend(loc='lower right', fontsize=styles.get('legend_fontsize', 12))
 
     plt.tight_layout()
+
+    # Construct the save path using the same basename and directory as the input file
+    base_name = os.path.splitext(os.path.basename(file_path))[0]
+    output_directory = os.path.dirname(file_path)
+    output_image_path = os.path.join(output_directory, base_name + '.png')
+
+    # Save the plot to the constructed file path
+    if save_image is True:
+        plt.savefig(output_image_path, dpi=600)
+
     plt.show()
 
 plot_styles = {
@@ -87,5 +95,8 @@ plot_styles = {
 
 file_path = r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax"
 
+#Uncomment the below to print a csv
 #print_ndax_as_csv(file_path)
-plot_capacity(file_path, theoretical_capacity=0.7, styles=plot_styles, min_cycle=0, max_cycle=60)
+plot_capacity(file_path, theoretical_capacity=0.7, styles=plot_styles, min_cycle=0, max_cycle=60, save_image=True)
+
+

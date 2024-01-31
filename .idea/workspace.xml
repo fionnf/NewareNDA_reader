@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="cycle number selection">
+    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="Bug fixes">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -188,7 +188,31 @@
       <option name="project" value="LOCAL" />
       <updated>1706717858257</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Modular plot styling + timing">
+      <option name="closed" value="true" />
+      <created>1706719450228</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706719450228</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Bug fixes">
+      <option name="closed" value="true" />
+      <created>1706719465178</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706719465178</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Bug fixes">
+      <option name="closed" value="true" />
+      <created>1706719510585</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706719510585</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -215,9 +239,11 @@
     <MESSAGE value="Fixed legend" />
     <MESSAGE value="Modular plot styling" />
     <MESSAGE value="cycle number selection" />
-    <option name="LAST_COMMIT_MESSAGE" value="cycle number selection" />
+    <MESSAGE value="Modular plot styling + timing" />
+    <MESSAGE value="Bug fixes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bug fixes" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706719348659" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706719633250" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
