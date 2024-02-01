@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="different file usage.">
-      <change afterPath="$PROJECT_DIR$/processing.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="UI basic working">
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +22,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="2b9a610d539274eb766edd921dc8294f921dc3f5" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,7 +61,8 @@
     "Python.processing.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "UI__local",
+    "last_opened_file_path": "C:/Users/S3941868/PycharmProjects/NewareNDA_Reader",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -117,7 +116,7 @@
       <workItem from="1706629896246" duration="1500000" />
       <workItem from="1706707632680" duration="113000" />
       <workItem from="1706716545760" duration="2063000" />
-      <workItem from="1706777425039" duration="1402000" />
+      <workItem from="1706777425039" duration="1719000" />
     </task>
     <task id="LOCAL-00001" summary="Read an NDA file and print it as a CSV">
       <option name="closed" value="true" />
@@ -239,7 +238,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706803822904</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="UI basic working">
+      <option name="closed" value="true" />
+      <created>1706804489705</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1706804489705</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -270,9 +277,10 @@
     <MESSAGE value="Bug fixes" />
     <MESSAGE value="Image saving" />
     <MESSAGE value="different file usage." />
-    <option name="LAST_COMMIT_MESSAGE" value="different file usage." />
+    <MESSAGE value="UI basic working" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI basic working" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706804239291" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706804561578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
