@@ -33,6 +33,8 @@ def execute():
 app = tk.Tk()
 app.title("Capacity Plotter")
 
+app.iconbitmap('assets/app_icon.ico')
+
 # Apply dark theme colors
 dark_bg = "#333333"
 light_fg = "#ffffff"
@@ -53,17 +55,17 @@ tk.Label(app, text="File Path:", **style_options).grid(row=0, column=0, padx=10,
 # Theoretical capacity entry
 theoretical_capacity_entry = tk.Entry(app, bg=entry_bg, fg=light_fg, insertbackground=light_fg)
 theoretical_capacity_entry.grid(row=1, column=1, padx=10, pady=10)
-tk.Label(app, text="Theoretical Capacity:", **style_options).grid(row=1, column=0, padx=10, pady=10)
+tk.Label(app, text="Theoretical Capacity (mAh):", **style_options).grid(row=1, column=0, padx=10, pady=10)
 
 # Min cycle entry
 min_cycle_entry = tk.Entry(app, bg=entry_bg, fg=light_fg, insertbackground=light_fg)
 min_cycle_entry.grid(row=2, column=1, padx=10, pady=10)
-tk.Label(app, text="Min Cycle:", **style_options).grid(row=2, column=0, padx=10, pady=10)
+tk.Label(app, text="Min Cycle (optional):", **style_options).grid(row=2, column=0, padx=10, pady=10)
 
 # Max cycle entry
 max_cycle_entry = tk.Entry(app, bg=entry_bg, fg=light_fg, insertbackground=light_fg)
 max_cycle_entry.grid(row=3, column=1, padx=10, pady=10)
-tk.Label(app, text="Max Cycle:", **style_options).grid(row=3, column=0, padx=10, pady=10)
+tk.Label(app, text="Max Cycle (optional):", **style_options).grid(row=3, column=0, padx=10, pady=10)
 
 # Checkboxes for CSV and image saving
 print_csv_var = tk.BooleanVar()

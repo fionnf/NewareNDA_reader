@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="UI basic working">
+    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="Dark theme">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -71,6 +72,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\S3941868\PycharmProjects\NewareNDA_Reader" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="processing" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="NewareNDA_Reader" />
@@ -116,7 +122,7 @@
       <workItem from="1706629896246" duration="1500000" />
       <workItem from="1706707632680" duration="113000" />
       <workItem from="1706716545760" duration="2063000" />
-      <workItem from="1706777425039" duration="1719000" />
+      <workItem from="1706777425039" duration="2102000" />
     </task>
     <task id="LOCAL-00001" summary="Read an NDA file and print it as a CSV">
       <option name="closed" value="true" />
@@ -246,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706804489705</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Dark theme">
+      <option name="closed" value="true" />
+      <created>1706804615666</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1706804615666</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -278,9 +292,11 @@
     <MESSAGE value="Image saving" />
     <MESSAGE value="different file usage." />
     <MESSAGE value="UI basic working" />
-    <option name="LAST_COMMIT_MESSAGE" value="UI basic working" />
+    <MESSAGE value="Dark theme" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dark theme" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706804561578" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewareNDA_Reader$processing.coverage" NAME="processing Coverage Results" MODIFIED="1706804688215" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706804692465" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
