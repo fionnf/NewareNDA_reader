@@ -93,10 +93,10 @@ plot_styles = {
     }
 }
 
-file_path = r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF042\FF042batt_a.ndax"
+file_path = r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF041\FF041Batt_b.ndax"
 
 #Uncomment the below to print a csv
 #print_ndax_as_csv(file_path)
-plot_capacity(file_path, theoretical_capacity=0.7, styles=plot_styles, min_cycle=0, max_cycle=60, save_image=True)
+plot_capacity(file_path, theoretical_capacity=0.7, styles=plot_styles, min_cycle=0, max_cycle=None, save_image=True)
 
 
