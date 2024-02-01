@@ -1,102 +1,58 @@
-import NewareNDA as nda
-import pandas as pd
-import os
-import matplotlib.pyplot as plt
+# main.py
+
+import tkinter as tk
+from tkinter import filedialog, messagebox
+import processing  # Make sure processing.py is in the same directory or its path is added to sys.path
 
 
-
-def print_ndax_as_csv(file_path):
-    data = nda.read(file_path)
-    df = pd.DataFrame(data)
-    base_name = os.path.splitext(os.path.basename(file_path))[0]
-    output_csv_path = os.path.join(os.path.dirname(file_path), base_name + '.csv')
-    df.to_csv(output_csv_path, index=False)
-    print(f'Data printed to CSV file: {output_csv_path}')
-    newaredata = df
+def browse_file():
+    filename = filedialog.askopenfilename(filetypes=[("NDAX files", "*.ndax")])
+    file_path_entry.delete(0, tk.END)
+    file_path_entry.insert(0, filename)
 
 
-def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=None, max_cycle=None, save_image=False):
-    if styles is None:
-        styles = {}
+def execute():
+    file_path = file_path_entry.get()
+    try:
+        theoretical_capacity = float(theoretical_capacity_entry.get())
+        min_cycle = int(min_cycle_entry.get()) if min_cycle_entry.get() else 0  # Defaulting to 0 if empty
+        max_cycle = int(max_cycle_entry.get()) if max_cycle_entry.get() else None  # No default, stays None if empty
+        save_image = save_image_var.get()
 
-    data = pd.DataFrame(nda.read(file_path))
+        # Assuming you have these functions properly defined in processing.py
+        processing.print_ndax_as_csv(file_path)
+        processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
 
-    if min_cycle is not None:
-        data = data[data['Cycle'] >= min_cycle]
-    if max_cycle is not None:
-        data = data[data['Cycle'] <= max_cycle]
-
-    grouped = data.groupby('Cycle')
-    max_charge = grouped['Charge_Capacity(mAh)'].max()
-    max_discharge = grouped['Discharge_Capacity(mAh)'].max()
-    coulombic_efficiency = (max_discharge / max_charge) * 100
-
-    fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
-
-    ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=styles.get('scatter_size', 10))
-    ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=styles.get('scatter_size', 10))
-    ax1.set_xlabel('Cycle Number', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.set_ylabel('Capacity (mAh)', color='blue', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.tick_params(axis='y', labelcolor='blue', labelsize=styles.get('tick_label_fontsize', 12))
-    ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
-    ax1.set_ylim(0, max(max_charge.max(), max_discharge.max()) * 1.1)
-    ax1.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
-
-    ax2 = ax1.twinx()
-    ax2.scatter(max_charge.index, coulombic_efficiency, label='Coulombic Efficiency', color='red', s=styles.get('scatter_size', 10))
-    ax2.set_ylabel('Coulombic Efficiency (%)', color='red', fontsize=styles.get('axis_label_fontsize', 14))
-    ax2.tick_params(axis='y', labelcolor='red', labelsize=styles.get('tick_label_fontsize', 12))
-    ax2.set_ylim(0, 110)
-    ax2.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
-
-    # Calculate the time in days for each cycle
-    cycle_start_times = grouped['Timestamp'].min()
-    first_measurement_time = cycle_start_times.min()
-    time_since_start = (cycle_start_times - first_measurement_time).dt.total_seconds() / 86400  # Convert to days
-
-    # Create a second x-axis for time since the start in days per cycle
-    ax3 = ax1.twiny()
-    ax3.set_xlabel('Time Since Start (days)', fontsize=styles.get('axis_label_fontsize', 14))
-    ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=styles.get('scatter_size', 0.005))
-    ax3.xaxis.set_ticks_position('top')  # Move to the top
-    ax3.xaxis.set_label_position('top')  # Move to the top
-    ax3.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
-    ax3.set_xlim([0, time_since_start.max()])  # Set x-axis limits
-
-    if theoretical_capacity is not None:
-        line_style = styles.get('line_styles', {}).get('theoretical_capacity', {'color': 'orange', 'linestyle': '--'})
-        ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
-
-    legend = ax1.legend(loc='lower right', fontsize=styles.get('legend_fontsize', 12))
-
-    plt.tight_layout()
-
-    # Construct the save path using the same basename and directory as the input file
-    base_name = os.path.splitext(os.path.basename(file_path))[0]
-    output_directory = os.path.dirname(file_path)
-    output_image_path = os.path.join(output_directory, base_name + '.png')
-
-    # Save the plot to the constructed file path
-    if save_image is True:
-        plt.savefig(output_image_path, dpi=600)
-
-    plt.show()
-
-plot_styles = {
-    'figure_size': (10, 8),
-    'axis_label_fontsize': 18,
-    'tick_label_fontsize': 16,
-    'legend_fontsize': 16,
-    'scatter_size': 20,
-    'line_styles': {
-        'theoretical_capacity': {'color': 'orange', 'linestyle': '--'}
-    }
-}
-
-file_path = r"G:\.shortcut-targets-by-id\1gpf-XKVVvMHbMGqpyQS5Amwp9fh8r96B\RUG shared\Master Project\Experiment files\FF041\FF041Batt_b.ndax"
-
-#Uncomment the below to print a csv
-#print_ndax_as_csv(file_path)
-plot_capacity(file_path, theoretical_capacity=0.7, styles=plot_styles, min_cycle=0, max_cycle=None, save_image=True)
+        messagebox.showinfo("Success", "Operation completed successfully")
+    except ValueError as e:
+        messagebox.showerror("Error", "Please check your input values")
 
 
+app = tk.Tk()
+app.title("Capacity Plotter")
+
+# Setup the UI
+file_path_entry = tk.Entry(app, width=50)
+file_path_entry.grid(row=0, column=1, padx=10, pady=10)
+tk.Button(app, text="Browse", command=browse_file).grid(row=0, column=2, padx=10, pady=10)
+tk.Label(app, text="File Path:").grid(row=0, column=0, padx=10, pady=10)
+
+theoretical_capacity_entry = tk.Entry(app)
+theoretical_capacity_entry.grid(row=1, column=1, padx=10, pady=10)
+tk.Label(app, text="Theoretical Capacity:").grid(row=1, column=0, padx=10, pady=10)
+
+min_cycle_entry = tk.Entry(app)
+min_cycle_entry.grid(row=2, column=1, padx=10, pady=10)
+tk.Label(app, text="Min Cycle:").grid(row=2, column=0, padx=10, pady=10)
+
+max_cycle_entry = tk.Entry(app)
+max_cycle_entry.grid(row=3, column=1, padx=10, pady=10)
+tk.Label(app, text="Max Cycle:").grid(row=3, column=0, padx=10, pady=10)
+
+save_image_var = tk.BooleanVar()
+tk.Checkbutton(app, text="Save Image", variable=save_image_var).grid(row=4, column=1, padx=10, pady=10, sticky='w')
+tk.Label(app, text="Save Image:").grid(row=4, column=0, padx=10, pady=10)
+
+tk.Button(app, text="Execute", command=execute).grid(row=5, column=0, columnspan=3, padx=10, pady=10)
+
+app.mainloop()
