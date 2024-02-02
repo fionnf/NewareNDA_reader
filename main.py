@@ -3,6 +3,8 @@
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import processing  # Ensure processing.py is accessible
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+
 
 
 def browse_file():
@@ -24,6 +26,26 @@ def execute():
         if print_csv:
             processing.print_ndax_as_csv(file_path)
         processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+
+        fig = processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+
+        for widget in app.winfo_children():
+            if isinstance(widget, tk.Canvas):
+                widget.destroy()
+
+        # Display the plot in the UI
+        canvas = FigureCanvasTkAgg(fig, master=app)
+        canvas.draw()
+        canvas.get_tk_widget().grid(row=7, column=0, columnspan=3, sticky="nsew", padx=20, pady=20)
+
+        # Add the toolbar
+        toolbar_frame = tk.Frame(master=app)  # Creating a frame for the toolbar
+        toolbar_frame.grid(row=8, column=0, columnspan=3, padx=10, pady=10)
+        toolbar = NavigationToolbar2Tk(canvas, toolbar_frame)
+        toolbar.update()
+
+        app.grid_rowconfigure(7, weight=1)
+        app.grid_columnconfigure(0, weight=1)
 
         messagebox.showinfo("Success", "Operation completed successfully", parent=app)
     except ValueError as e:

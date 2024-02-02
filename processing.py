@@ -32,6 +32,7 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
     coulombic_efficiency = (max_discharge / max_charge) * 100
 
     fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
+    fig.subplots_adjust(top=0.9, bottom=0.1)
 
     ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=styles.get('scatter_size', 10))
     ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=styles.get('scatter_size', 10))
@@ -80,7 +81,8 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
     if save_image is True:
         plt.savefig(output_image_path, dpi=600)
 
-    plt.show()
+    #plt.show()
+    return fig
 
 plot_styles = {
     'figure_size': (10, 8),
