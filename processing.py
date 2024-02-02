@@ -3,8 +3,6 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 
-
-
 def print_ndax_as_csv(file_path):
     data = nda.read(file_path)
     df = pd.DataFrame(data)
@@ -75,13 +73,45 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
     # Construct the save path using the same basename and directory as the input file
     base_name = os.path.splitext(os.path.basename(file_path))[0]
     output_directory = os.path.dirname(file_path)
-    output_image_path = os.path.join(output_directory, base_name + '.png')
+    output_image_path = os.path.join(output_directory, base_name + '_capacity.png')
 
     # Save the plot to the constructed file path
     if save_image is True:
         plt.savefig(output_image_path, dpi=600)
 
     #plt.show()
+    return fig
+
+
+def plot_voltage_trace(file_path, cycle_range=None, styles=None, save_image=False):
+    data = pd.DataFrame(nda.read(file_path))
+
+    # Filter data by cycle range if specified
+    if cycle_range is not None:
+        data = data[(data['Cycle'] >= cycle_range[0]) & (data['Cycle'] <= cycle_range[1])]
+
+    fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
+
+    # Assuming 'Timestamp' and 'Voltage' columns exist
+    ax1.plot(data['Timestamp'], data['Voltage'], label='Voltage Trace')
+
+    ax1.set_xlabel('Time', fontsize=styles.get('axis_label_fontsize', 14))
+    ax1.set_ylabel('Voltage (V)', color='tab:red', fontsize=styles.get('axis_label_fontsize', 14))
+    ax1.tick_params(axis='y', labelcolor='tab:red', labelsize=styles.get('tick_label_fontsize', 12))
+    ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
+
+    # Optional: Add cycle number as secondary x-axis
+    ax2 = ax1.twiny()
+    ax2.set_xlabel('Cycle Number', fontsize=styles.get('axis_label_fontsize', 14))
+    # This requires mapping time to cycle number explicitly, which depends on your data structure
+
+    base_name = os.path.splitext(os.path.basename(file_path))[0]
+    output_directory = os.path.dirname(file_path)
+    output_image_path = os.path.join(output_directory, base_name + '_voltage.png')
+    if save_image is True:
+        plt.savefig(output_image_path, dpi=600)
+
+    fig.tight_layout()
     return fig
 
 plot_styles = {
