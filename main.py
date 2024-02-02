@@ -17,6 +17,7 @@ def execute():
     file_path = file_path_entry.get()
     print_csv = print_csv_var.get()
     save_image = save_image_var.get()
+    plot_type = plot_type_var.get()
     try:
         theoretical_capacity = float(theoretical_capacity_entry.get())
         min_cycle = int(min_cycle_entry.get()) if min_cycle_entry.get() else 0  # Default to 0 if empty
@@ -25,7 +26,11 @@ def execute():
         # Conditional execution based on user choices
         if print_csv:
             processing.print_ndax_as_csv(file_path)
-        processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+
+        if plot_type == "Capacity":
+            fig = processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+        elif plot_type == "Voltage":
+            fig = processing.plot_voltage(file_path, min_cycle, max_cycle, save_image)
 
         fig = processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
 
@@ -97,11 +102,17 @@ tk.Checkbutton(app, text="Print CSV", variable=print_csv_var, selectcolor=dark_b
                                                                                                          sticky='w',
                                                                                                          padx=10,
                                                                                                          pady=10)
-tk.Checkbutton(app, text="Save Image", variable=save_image_var, selectcolor=dark_bg, **style_options).grid(row=5,
-                                                                                                           column=1,
+tk.Checkbutton(app, text="Save Image", variable=save_image_var, selectcolor=dark_bg, **style_options).grid(row=4,
+                                                                                                           column=2,
                                                                                                            sticky='w',
                                                                                                            padx=10,
                                                                                                            pady=10)
+
+#capacity or V plot
+plot_type_var = tk.StringVar(value="Capacity")
+tk.Radiobutton(app, text="Capacity", variable=plot_type_var, value="Capacity", bg=dark_bg, fg=light_fg).grid(row=5, column=1, sticky='w', padx=10, pady=10)
+tk.Radiobutton(app, text="Voltage", variable=plot_type_var, value="Voltage", bg=dark_bg, fg=light_fg).grid(row=5, column=2, sticky='w', padx=10, pady=10)
+
 
 # Execute button
 tk.Button(app, text="Execute", command=execute, bg=button_bg, fg=light_fg).grid(row=6, column=0, columnspan=3, padx=10,
