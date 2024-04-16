@@ -13,7 +13,7 @@ def print_ndax_as_csv(file_path):
     newaredata = df
 
 
-def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, min_cycle=None, max_cycle=None, save_image=False):
+def plot_capacity(file_path, start_min, theoretical_capacity=None, capacityper_yn=None, styles=None, min_cycle=None, max_cycle=None, save_image=False):
     if styles is None:
         styles = {}
 
@@ -39,6 +39,16 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
     grouped = data.groupby('Adjusted Cycle')
     max_charge = grouped['Charge_Capacity(mAh)'].max()
     max_discharge = grouped['Discharge_Capacity(mAh)'].max()
+
+    # Decide whether to show capacity in mAh or as a percentage
+    if capacityper_yn:
+        max_charge = (max_charge / theoretical_capacity) * 100
+        max_discharge = (max_discharge / theoretical_capacity) * 100
+        y_label = 'Capacity (%)'
+        theoretical_capacity = 100
+    else:
+        y_label = 'Capacity (mAh)'
+
     coulombic_efficiency = (max_discharge / max_charge) * 100
 
     fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
@@ -47,7 +57,7 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
     charge_plot = ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=styles.get('scatter_size', 10))
     discharge_plot = ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=styles.get('scatter_size', 10))
     ax1.set_xlabel('Cycle Number', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.set_ylabel('Capacity (mAh)', color='blue', fontsize=styles.get('axis_label_fontsize', 14))
+    ax1.set_ylabel(y_label, color='blue', fontsize=styles.get('axis_label_fontsize', 14))
     ax1.tick_params(axis='y', labelcolor='blue', labelsize=styles.get('tick_label_fontsize', 12))
     ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
     ax1.set_ylim(0, max(max_charge.max(), max_discharge.max()) * 1.1)

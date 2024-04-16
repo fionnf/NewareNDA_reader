@@ -20,6 +20,7 @@ def execute():
     capacity_yn = capacity_var.get()
     voltage_yn = voltage_var.get()
     start_min_yn = start_min.get()
+    capacityper_yn = capacity_per.get()
     try:
         theoretical_capacity = float(theoretical_capacity_entry.get())
         min_cycle = int(min_cycle_entry.get()) if min_cycle_entry.get() else 0  # Default to 0 if empty
@@ -30,7 +31,7 @@ def execute():
             processing.print_ndax_as_csv(file_path)
 
         if capacity_yn == True:
-            fig = processing.plot_capacity(file_path, start_min_yn, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+            fig = processing.plot_capacity(file_path, start_min_yn, theoretical_capacity, capacityper_yn, {}, min_cycle, max_cycle, save_image)
         elif voltage_yn == True:
             fig = processing.plot_voltage(file_path, min_cycle, max_cycle, save_image)
 
@@ -85,6 +86,13 @@ tk.Label(app, text="File Path:", **style_options).grid(row=0, column=0, padx=10,
 theoretical_capacity_entry = tk.Entry(app, bg=entry_bg, fg=light_fg, insertbackground=light_fg)
 theoretical_capacity_entry.grid(row=1, column=1, padx=10, pady=10)
 tk.Label(app, text="Theoretical Capacity (mAh):", **style_options).grid(row=1, column=0, padx=10, pady=10)
+
+capacity_per = tk.BooleanVar()
+tk.Checkbutton(app, text="Show %?", variable=capacity_per, selectcolor=dark_bg, **style_options).grid(row=1,
+                                                                                                         column=2,
+                                                                                                         sticky='w',
+                                                                                                         padx=10,
+                                                                                                         pady=10)
 
 # Min cycle entry
 min_cycle_entry = tk.Entry(app, bg=entry_bg, fg=light_fg, insertbackground=light_fg)
