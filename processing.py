@@ -3,6 +3,17 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 
+plot_styles = {
+    'figure_size': (10, 8),
+    'axis_label_fontsize': 25,
+    'tick_label_fontsize': 25,
+    'legend_fontsize': 25,
+    'scatter_size': 15,
+    'line_styles': {
+        'theoretical_capacity': {'color': 'orange', 'linestyle': '--'}
+    }
+}
+
 def print_ndax_as_csv(file_path):
     data = nda.read(file_path)
     df = pd.DataFrame(data)
@@ -15,7 +26,7 @@ def print_ndax_as_csv(file_path):
 
 def plot_capacity(file_path, start_min, theoretical_capacity=None, capacityper_yn=None, styles=None, min_cycle=None, max_cycle=None, save_image=False):
     if styles is None:
-        styles = {}
+        styles = plot_styles
 
     data = pd.DataFrame(nda.read(file_path))
 
@@ -54,30 +65,30 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, capacityper_y
     fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
     fig.subplots_adjust(top=0.9, bottom=0.1)
 
-    charge_plot = ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=styles.get('scatter_size', 10))
-    discharge_plot = ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=styles.get('scatter_size', 10))
-    ax1.set_xlabel('Cycle Number', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.set_ylabel(y_label, color='blue', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.tick_params(axis='y', labelcolor='blue', labelsize=styles.get('tick_label_fontsize', 12))
-    ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
+    charge_plot = ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=styles.get('scatter_size'))
+    discharge_plot = ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=styles.get('scatter_size'))
+    ax1.set_xlabel('Cycle Number', fontsize=styles.get('axis_label_fontsize'))
+    ax1.set_ylabel(y_label, color='blue', fontsize=styles.get('axis_label_fontsize'))
+    ax1.tick_params(axis='y', labelcolor='blue', labelsize=styles.get('tick_label_fontsize'))
+    ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize'))
     ax1.set_ylim(0, max(max_charge.max(), max_discharge.max()) * 1.1)
     ax1.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
 
     ax2 = ax1.twinx()
-    efficiency_plot = ax2.scatter(max_charge.index, coulombic_efficiency, label='Coulombic Efficiency', color='red', s=styles.get('scatter_size', 10))
-    ax2.set_ylabel('Coulombic Efficiency (%)', color='red', fontsize=styles.get('axis_label_fontsize', 14))
-    ax2.tick_params(axis='y', labelcolor='red', labelsize=styles.get('tick_label_fontsize', 12))
+    efficiency_plot = ax2.scatter(max_charge.index, coulombic_efficiency, label='Coulombic Efficiency', color='red', s=styles.get('scatter_size'))
+    ax2.set_ylabel('Coulombic Efficiency (%)', color='red', fontsize=styles.get('axis_label_fontsize'))
+    ax2.tick_params(axis='y', labelcolor='red', labelsize=styles.get('tick_label_fontsize'))
     ax2.set_ylim(0, 110)
     ax2.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
 
     # Add a second x-axis for time since the start in days
     ax3 = ax1.twiny()
-    ax3.set_xlabel('Time (days)', fontsize=styles.get('axis_label_fontsize', 14))
+    ax3.set_xlabel('Time (days)', fontsize=styles.get('axis_label_fontsize'))
     ax3.scatter(max_charge.index, data.groupby('Adjusted Cycle')['Adjusted Time'].first(), color='gray', marker='.',
                 s=styles.get('scatter_size', 0.005))
     ax3.xaxis.set_ticks_position('top')
     ax3.xaxis.set_label_position('top')
-    ax3.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
+    ax3.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize'))
     ax3.set_xlim([0, data['Adjusted Time'].max()])
 
     # Optional theoretical capacity line
@@ -89,7 +100,7 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, capacityper_y
         plots = [charge_plot, discharge_plot, efficiency_plot]
 
     labels = [plot.get_label() for plot in plots]
-    ax1.legend(plots, labels, loc='lower left', fontsize=styles.get('legend_fontsize', 12))
+    ax1.legend(plots, labels, loc='lower left', fontsize=styles.get('legend_fontsize'))
 
     plt.tight_layout()
 
@@ -102,20 +113,11 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, capacityper_y
 
     return fig
 
-plot_styles = {
-    'figure_size': (10, 8),
-    'axis_label_fontsize': 18,
-    'tick_label_fontsize': 16,
-    'legend_fontsize': 16,
-    'scatter_size': 20,
-    'line_styles': {
-        'theoretical_capacity': {'color': 'orange', 'linestyle': '--'}
-    }
-}
+
 
 def plot_voltage(file_path, min_cycle=None, max_cycle=None, save_image=False, styles=None):
     if styles is None:
-        styles = {}
+        styles = plot_styles
 
     # Load data
     data = pd.DataFrame(nda.read(file_path))
@@ -136,12 +138,12 @@ def plot_voltage(file_path, min_cycle=None, max_cycle=None, save_image=False, st
     fig.subplots_adjust(top=0.9, bottom=0.1)
 
     ax1.plot(data['Elapsed Time'], data['Voltage'], label='Voltage', color='black')
-    ax1.set_xlabel('Time (hours)', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.set_ylabel('Voltage (V)', color='black', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.tick_params(axis='y', labelcolor='black', labelsize=styles.get('tick_label_fontsize', 12))
-    ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
+    ax1.set_xlabel('Time (hours)', fontsize=styles.get('axis_label_fontsize'))
+    ax1.set_ylabel('Voltage (V)', color='black', fontsize=styles.get('axis_label_fontsize'))
+    ax1.tick_params(axis='y', labelcolor='black', labelsize=styles.get('tick_label_fontsize'))
+    ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize'))
 
-    ax1.legend(loc='lower left', fontsize=styles.get('legend_fontsize', 12))
+    ax1.legend(loc='lower left', fontsize=styles.get('legend_fontsize'))
 
     plt.tight_layout()
 
