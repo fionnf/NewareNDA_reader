@@ -19,6 +19,7 @@ def execute():
     save_image = save_image_var.get()
     capacity_yn = capacity_var.get()
     voltage_yn = voltage_var.get()
+    start_min_yn = start_min.get()
     try:
         theoretical_capacity = float(theoretical_capacity_entry.get())
         min_cycle = int(min_cycle_entry.get()) if min_cycle_entry.get() else 0  # Default to 0 if empty
@@ -29,7 +30,7 @@ def execute():
             processing.print_ndax_as_csv(file_path)
 
         if capacity_yn == True:
-            fig = processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+            fig = processing.plot_capacity(file_path, start_min_yn, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
         elif voltage_yn == True:
             fig = processing.plot_voltage(file_path, min_cycle, max_cycle, save_image)
 
