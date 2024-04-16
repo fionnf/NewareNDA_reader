@@ -3,8 +3,6 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 
-
-
 def print_ndax_as_csv(file_path):
     data = nda.read(file_path)
     df = pd.DataFrame(data)
@@ -81,7 +79,7 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
         plots = [charge_plot, discharge_plot, efficiency_plot]
 
     labels = [plot.get_label() for plot in plots]
-    ax1.legend(plots, labels, loc='lower right', fontsize=styles.get('legend_fontsize', 12))
+    ax1.legend(plots, labels, loc='lower left', fontsize=styles.get('legend_fontsize', 12))
 
     plt.tight_layout()
 
@@ -133,7 +131,7 @@ def plot_voltage(file_path, min_cycle=None, max_cycle=None, save_image=False, st
     ax1.tick_params(axis='y', labelcolor='black', labelsize=styles.get('tick_label_fontsize', 12))
     ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
 
-    ax1.legend(loc='upper right', fontsize=styles.get('legend_fontsize', 12))
+    ax1.legend(loc='lower left', fontsize=styles.get('legend_fontsize', 12))
 
     plt.tight_layout()
 
