@@ -46,8 +46,8 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
     fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
     fig.subplots_adjust(top=0.9, bottom=0.1)
 
-    ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=styles.get('scatter_size', 10))
-    ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=styles.get('scatter_size', 10))
+    charge_plot = ax1.scatter(max_charge.index, max_charge, label='Charge Capacity', color='blue', s=styles.get('scatter_size', 10))
+    discharge_plot = ax1.scatter(max_discharge.index, max_discharge, label='Discharge Capacity', color='green', s=styles.get('scatter_size', 10))
     ax1.set_xlabel('Cycle Number', fontsize=styles.get('axis_label_fontsize', 14))
     ax1.set_ylabel('Capacity (mAh)', color='blue', fontsize=styles.get('axis_label_fontsize', 14))
     ax1.tick_params(axis='y', labelcolor='blue', labelsize=styles.get('tick_label_fontsize', 12))
@@ -56,7 +56,7 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
     ax1.set_xlim(0, max(max_charge.index.max(), max_discharge.index.max()) * 1.1)
 
     ax2 = ax1.twinx()
-    ax2.scatter(max_charge.index, coulombic_efficiency, label='Coulombic Efficiency', color='red', s=styles.get('scatter_size', 10))
+    efficiency_plot = ax2.scatter(max_charge.index, coulombic_efficiency, label='Coulombic Efficiency', color='red', s=styles.get('scatter_size', 10))
     ax2.set_ylabel('Coulombic Efficiency (%)', color='red', fontsize=styles.get('axis_label_fontsize', 14))
     ax2.tick_params(axis='y', labelcolor='red', labelsize=styles.get('tick_label_fontsize', 12))
     ax2.set_ylim(0, 110)
@@ -77,7 +77,10 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
         line_style = styles.get('line_styles', {}).get('theoretical_capacity', {'color': 'orange', 'linestyle': '--'})
         ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
 
-    legend = ax1.legend(loc='lower right', fontsize=styles.get('legend_fontsize', 12))
+    # Adding a comprehensive legend that includes elements from both ax1 and ax2
+    plots = [charge_plot, discharge_plot, efficiency_plot]
+    labels = [plot.get_label() for plot in plots]
+    ax1.legend(plots, labels, loc='lower right', fontsize=styles.get('legend_fontsize', 12))
 
     plt.tight_layout()
 
