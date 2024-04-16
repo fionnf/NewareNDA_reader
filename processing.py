@@ -73,12 +73,13 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
     ax3.set_xlim([0, data['Adjusted Time'].max()])
 
     # Optional theoretical capacity line
+    theoretical_plot = None
     if theoretical_capacity is not None:
         line_style = styles.get('line_styles', {}).get('theoretical_capacity', {'color': 'orange', 'linestyle': '--'})
-        ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
+        theoretical_plot = ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
 
     # Adding a comprehensive legend that includes elements from both ax1 and ax2
-    plots = [charge_plot, discharge_plot, efficiency_plot]
+    plots = [charge_plot, discharge_plot, efficiency_plot, theoretical_plot]
     labels = [plot.get_label() for plot in plots]
     ax1.legend(plots, labels, loc='lower right', fontsize=styles.get('legend_fontsize', 12))
 
