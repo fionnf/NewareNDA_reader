@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="plot plot in UI">
+    <list default="true" id="1862806c-c15f-440a-8e6a-76dd250b46c3" name="Changes" comment="plot plot in UI not fully working">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/processing.py" beforeDir="false" afterPath="$PROJECT_DIR$/processing.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,22 +55,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.main.executor": "Run",
-    "Python.processing.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Voltage-plot",
-    "last_opened_file_path": "C:/Users/S3941868/PycharmProjects/NewareNDA_Reader",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.processing.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Voltage-plot&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/S3941868/PycharmProjects/NewareNDA_Reader&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\S3941868\PycharmProjects\NewareNDA_Reader" />
@@ -127,7 +125,12 @@
       <workItem from="1706707632680" duration="113000" />
       <workItem from="1706716545760" duration="2063000" />
       <workItem from="1706777425039" duration="2254000" />
-      <workItem from="1706883593933" duration="2095000" />
+      <workItem from="1706883593933" duration="919000" />
+      <workItem from="1707119901137" duration="15000" />
+      <workItem from="1707929615560" duration="175000" />
+      <workItem from="1707985646624" duration="878000" />
+      <workItem from="1708097038158" duration="72000" />
+      <workItem from="1708329929233" duration="3150000" />
     </task>
     <task id="LOCAL-00001" summary="Read an NDA file and print it as a CSV">
       <option name="closed" value="true" />
@@ -273,13 +276,13 @@
       <option name="project" value="LOCAL" />
       <updated>1706805095069</updated>
     </task>
-    <task id="LOCAL-00019" summary="plot plot in UI">
+    <task id="LOCAL-00019" summary="plot plot in UI not fully working">
       <option name="closed" value="true" />
-      <created>1706884668388</created>
+      <created>1706885996629</created>
       <option name="number" value="00019" />
       <option name="presentableId" value="LOCAL-00019" />
       <option name="project" value="LOCAL" />
-      <updated>1706884668389</updated>
+      <updated>1706885996629</updated>
     </task>
     <option name="localTasksCounter" value="20" />
     <servers />
@@ -315,11 +318,11 @@
     <MESSAGE value="UI basic working" />
     <MESSAGE value="Dark theme" />
     <MESSAGE value="Added icon" />
-    <MESSAGE value="plot plot in UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="plot plot in UI" />
+    <MESSAGE value="plot plot in UI not fully working" />
+    <option name="LAST_COMMIT_MESSAGE" value="plot plot in UI not fully working" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/NewareNDA_Reader$processing.coverage" NAME="processing Coverage Results" MODIFIED="1706884046650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1706885689642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewareNDA_Reader$processing.coverage" NAME="processing Coverage Results" MODIFIED="1707929636376" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/NewareNDA_Reader$main.coverage" NAME="main Coverage Results" MODIFIED="1708329969795" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

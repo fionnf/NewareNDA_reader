@@ -17,6 +17,9 @@ def execute():
     file_path = file_path_entry.get()
     print_csv = print_csv_var.get()
     save_image = save_image_var.get()
+    capacity_yn = capacity_var.get()
+    voltage_yn = voltage_var.get()
+    start_min_yn = start_min.get()
     try:
         theoretical_capacity = float(theoretical_capacity_entry.get())
         min_cycle = int(min_cycle_entry.get()) if min_cycle_entry.get() else 0  # Default to 0 if empty
@@ -25,9 +28,13 @@ def execute():
         # Conditional execution based on user choices
         if print_csv:
             processing.print_ndax_as_csv(file_path)
-        processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
 
-        fig = processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+        if capacity_yn == True:
+            fig = processing.plot_capacity(file_path, start_min_yn, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
+        elif voltage_yn == True:
+            fig = processing.plot_voltage(file_path, min_cycle, max_cycle, save_image)
+
+        #fig = processing.plot_capacity(file_path, theoretical_capacity, {}, min_cycle, max_cycle, save_image)
 
         for widget in app.winfo_children():
             if isinstance(widget, tk.Canvas):
@@ -84,6 +91,13 @@ min_cycle_entry = tk.Entry(app, bg=entry_bg, fg=light_fg, insertbackground=light
 min_cycle_entry.grid(row=2, column=1, padx=10, pady=10)
 tk.Label(app, text="Min Cycle (optional):", **style_options).grid(row=2, column=0, padx=10, pady=10)
 
+start_min = tk.BooleanVar()
+tk.Checkbutton(app, text="Start time?", variable=start_min, selectcolor=dark_bg, **style_options).grid(row=2,
+                                                                                                         column=2,
+                                                                                                         sticky='w',
+                                                                                                         padx=10,
+                                                                                                         pady=10)
+
 # Max cycle entry
 max_cycle_entry = tk.Entry(app, bg=entry_bg, fg=light_fg, insertbackground=light_fg)
 max_cycle_entry.grid(row=3, column=1, padx=10, pady=10)
@@ -97,8 +111,25 @@ tk.Checkbutton(app, text="Print CSV", variable=print_csv_var, selectcolor=dark_b
                                                                                                          sticky='w',
                                                                                                          padx=10,
                                                                                                          pady=10)
-tk.Checkbutton(app, text="Save Image", variable=save_image_var, selectcolor=dark_bg, **style_options).grid(row=5,
+tk.Checkbutton(app, text="Save Image", variable=save_image_var, selectcolor=dark_bg, **style_options).grid(row=4,
+                                                                                                           column=2,
+                                                                                                           sticky='w',
+                                                                                                           padx=10,
+                                                                                                           pady=10)
+
+
+
+#capacity or V plot
+capacity_var = tk.BooleanVar(value=False)
+voltage_var = tk.BooleanVar(value=False)
+
+tk.Checkbutton(app, text="Plot Capacity", variable=capacity_var, selectcolor=dark_bg, **style_options).grid(row=5,
                                                                                                            column=1,
+                                                                                                           sticky='w',
+                                                                                                           padx=10,
+                                                                                                           pady=10)
+tk.Checkbutton(app, text="Plot Voltage", variable=voltage_var, selectcolor=dark_bg, **style_options).grid(row=5,
+                                                                                                           column=2,
                                                                                                            sticky='w',
                                                                                                            padx=10,
                                                                                                            pady=10)
