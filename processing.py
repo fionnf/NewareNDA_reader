@@ -97,7 +97,7 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, capacityper_y
     if save_image:
         base_name = os.path.splitext(os.path.basename(file_path))[0]
         output_directory = os.path.dirname(file_path)
-        output_image_path = os.path.join(output_directory, base_name + '.png')
+        output_image_path = os.path.join(output_directory, base_name + '_capacity.png')
         plt.savefig(output_image_path, dpi=600)
 
     return fig
