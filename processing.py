@@ -95,7 +95,7 @@ plot_styles = {
     }
 }
 
-def plot_voltage(file_path, min_cycle=None, max_cycle=None, save_image=False):
+def plot_voltage(file_path, min_cycle=None, max_cycle=None, save_image=False, styles=None):
     if styles is None:
         styles = {}
 
@@ -108,18 +108,19 @@ def plot_voltage(file_path, min_cycle=None, max_cycle=None, save_image=False):
     if max_cycle is not None:
         data = data[data['Cycle'] <= max_cycle]
 
-    # Group by measurement time or index, depending on how data is recorded
+    # Convert Timestamps to datetime and then to elapsed time in hours
     data['Time'] = pd.to_datetime(data['Timestamp'])
-    data.set_index('Time', inplace=True)
+    start_time = data['Time'].min()
+    data['Elapsed Time'] = (data['Time'] - start_time).dt.total_seconds() / 3600  # Convert to hours
 
     # Plotting voltage over time
     fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
     fig.subplots_adjust(top=0.9, bottom=0.1)
 
-    ax1.plot(data.index, data['Voltage'], label='Voltage', color='blue')
-    ax1.set_xlabel('Time', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.set_ylabel('Voltage (V)', color='blue', fontsize=styles.get('axis_label_fontsize', 14))
-    ax1.tick_params(axis='y', labelcolor='blue', labelsize=styles.get('tick_label_fontsize', 12))
+    ax1.plot(data['Elapsed Time'], data['Voltage'], label='Voltage', color='black')
+    ax1.set_xlabel('Time (hours)', fontsize=styles.get('axis_label_fontsize', 14))
+    ax1.set_ylabel('Voltage (V)', color='black', fontsize=styles.get('axis_label_fontsize', 14))
+    ax1.tick_params(axis='y', labelcolor='black', labelsize=styles.get('tick_label_fontsize', 12))
     ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
 
     ax1.legend(loc='upper right', fontsize=styles.get('legend_fontsize', 12))
