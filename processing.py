@@ -64,7 +64,7 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
 
     # Add a second x-axis for time since the start in days
     ax3 = ax1.twiny()
-    ax3.set_xlabel('Time Since Start (days)', fontsize=styles.get('axis_label_fontsize', 14))
+    ax3.set_xlabel('Time (days)', fontsize=styles.get('axis_label_fontsize', 14))
     ax3.scatter(max_charge.index, data.groupby('Adjusted Cycle')['Adjusted Time'].first(), color='gray', marker='.',
                 s=styles.get('scatter_size', 0.005))
     ax3.xaxis.set_ticks_position('top')
@@ -73,13 +73,13 @@ def plot_capacity(file_path, start_min, theoretical_capacity=None, styles=None, 
     ax3.set_xlim([0, data['Adjusted Time'].max()])
 
     # Optional theoretical capacity line
-    theoretical_plot = None
     if theoretical_capacity is not None:
         line_style = styles.get('line_styles', {}).get('theoretical_capacity', {'color': 'orange', 'linestyle': '--'})
         theoretical_plot = ax1.axhline(theoretical_capacity, label='Theoretical Capacity', **line_style)
+        plots = [charge_plot, discharge_plot, efficiency_plot, theoretical_plot]
+    else:
+        plots = [charge_plot, discharge_plot, efficiency_plot]
 
-    # Adding a comprehensive legend that includes elements from both ax1 and ax2
-    plots = [charge_plot, discharge_plot, efficiency_plot, theoretical_plot]
     labels = [plot.get_label() for plot in plots]
     ax1.legend(plots, labels, loc='lower right', fontsize=styles.get('legend_fontsize', 12))
 
