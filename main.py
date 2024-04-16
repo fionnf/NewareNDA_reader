@@ -109,10 +109,16 @@ tk.Checkbutton(app, text="Save Image", variable=save_image_var, selectcolor=dark
                                                                                                            pady=10)
 
 #capacity or V plot
-plot_type_var = tk.StringVar(value="Capacity")
-tk.Radiobutton(app, text="Capacity", variable=plot_type_var, value="Capacity", bg=dark_bg, fg=light_fg).grid(row=5, column=1, sticky='w', padx=10, pady=10)
-tk.Radiobutton(app, text="Voltage", variable=plot_type_var, value="Voltage", bg=dark_bg, fg=light_fg).grid(row=5, column=2, sticky='w', padx=10, pady=10)
+capacity_var = tk.BooleanVar(value=False)
+voltage_var = tk.BooleanVar(value=False)
 
+capacity_check = tk.Checkbutton(app, text="Capacity", variable=capacity_var, onvalue=True, offvalue=False,
+                                bg=dark_bg, fg=light_fg)
+capacity_check.grid(row=0, column=1, sticky='w', padx=10, pady=10)
+
+voltage_check = tk.Checkbutton(app, text="Voltage", variable=voltage_var, onvalue=True, offvalue=False,
+                               bg=dark_bg, fg=light_fg)
+voltage_check.grid(row=0, column=2, sticky='w', padx=10, pady=10)
 
 # Execute button
 tk.Button(app, text="Execute", command=execute, bg=button_bg, fg=light_fg).grid(row=6, column=0, columnspan=3, padx=10,

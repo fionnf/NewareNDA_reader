@@ -57,7 +57,7 @@ def plot_capacity(file_path, theoretical_capacity=None, styles=None, min_cycle=N
 
     # Create a second x-axis for time since the start in days per cycle
     ax3 = ax1.twiny()
-    ax3.set_xlabel('Time Since Start (days)', fontsize=styles.get('axis_label_fontsize', 14))
+    ax3.set_xlabel('Time (days)', fontsize=styles.get('axis_label_fontsize', 14))
     ax3.scatter(max_charge.index, time_since_start, color='gray', marker='.', s=styles.get('scatter_size', 0.005))
     ax3.xaxis.set_ticks_position('top')  # Move to the top
     ax3.xaxis.set_label_position('top')  # Move to the top
@@ -94,5 +94,49 @@ plot_styles = {
         'theoretical_capacity': {'color': 'orange', 'linestyle': '--'}
     }
 }
+
+def plot_voltage(file_path, min_cycle=None, max_cycle=None, save_image=False):
+    if styles is None:
+        styles = {}
+
+    # Load data
+    data = pd.DataFrame(nda.read(file_path))
+
+    # Filter cycles if specified
+    if min_cycle is not None:
+        data = data[data['Cycle'] >= min_cycle]
+    if max_cycle is not None:
+        data = data[data['Cycle'] <= max_cycle]
+
+    # Group by measurement time or index, depending on how data is recorded
+    data['Time'] = pd.to_datetime(data['Timestamp'])
+    data.set_index('Time', inplace=True)
+
+    # Plotting voltage over time
+    fig, ax1 = plt.subplots(figsize=styles.get('figure_size', (10, 8)))
+    fig.subplots_adjust(top=0.9, bottom=0.1)
+
+    ax1.plot(data.index, data['Voltage'], label='Voltage', color='blue')
+    ax1.set_xlabel('Time', fontsize=styles.get('axis_label_fontsize', 14))
+    ax1.set_ylabel('Voltage (V)', color='blue', fontsize=styles.get('axis_label_fontsize', 14))
+    ax1.tick_params(axis='y', labelcolor='blue', labelsize=styles.get('tick_label_fontsize', 12))
+    ax1.tick_params(axis='x', labelsize=styles.get('tick_label_fontsize', 12))
+
+    ax1.legend(loc='upper right', fontsize=styles.get('legend_fontsize', 12))
+
+    plt.tight_layout()
+
+    # Construct the save path using the same basename and directory as the input file
+    base_name = os.path.splitext(os.path.basename(file_path))[0]
+    output_directory = os.path.dirname(file_path)
+    output_image_path = os.path.join(output_directory, base_name + '_voltage.png')
+
+    # Save the plot to the constructed file path
+    if save_image:
+        plt.savefig(output_image_path, dpi=600)
+
+    # plt.show()  # Uncomment this line to display the plot when not running in a script
+    return fig
+
 
 
