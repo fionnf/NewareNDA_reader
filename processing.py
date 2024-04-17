@@ -3,6 +3,7 @@ import pandas as pd
 import os
 import matplotlib.pyplot as plt
 font_size = 20
+#font_size = font_size_entry.get()
 
 plot_styles = {
     'figure_size': (10, 8),

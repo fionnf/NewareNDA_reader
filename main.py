@@ -143,7 +143,7 @@ tk.Checkbutton(app, text="Plot Voltage", variable=voltage_var, selectcolor=dark_
                                                                                                            pady=10)
 
 # Execute button
-tk.Button(app, text="Execute", command=execute, bg=button_bg, fg=light_fg).grid(row=6, column=0, columnspan=3, padx=10,
+tk.Button(app, text="Execute", command=execute, bg=button_bg, fg=light_fg).grid(row=7, column=0, columnspan=3, padx=10,
                                                                                 pady=10)
 
 app.mainloop()
